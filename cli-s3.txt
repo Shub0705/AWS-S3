@@ -1,0 +1,20 @@
+AWS S3 CLI
+first thing check, you have CLI in your system
+##for check command is
+1)aws --version (if it is no then download)
+aws-cli/2.17.18---->(version)
+
+2)aws configure
+AWS Access Key ""
+AWS Secret Access Key ""
+Default region name "your region"
+
+3)aws sts get-caller-identity ---->(this command is show user-id,account,arn)
+4)aws s3 ls ---->(list of bucket)
+5)aws s3 ls s3://"your bucket name" ----->(this command for show object inside bucket)
+
+##for move object from 1bucket to another bucket##
+
+6)aws s3 mv s3://"bucket-name"/"object-name" s3://"destination bucket-name"
+
+7)aws s3 ls s3://"bucket-name" --recursive --->(this command for view all the content inside the bucket)
