@@ -1,0 +1,14 @@
+***Mount S3 bucket to an EC2 instance****
+1)Launch an instance
+2)Create Bucket
+3)create role and attch s3full access
+4) attach role on instance
+5)Go to AWS Documentation
+Installing Mountpoint-----copy latest architecture
+$ wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
+ ls
+sudo yum install mount-s3.rpm
+aws s3 ls
+mkdir "any name"------>create any directory
+mount-s3 "bucket-name(you want to mount)" "directory name(that you create before)"
+ 
