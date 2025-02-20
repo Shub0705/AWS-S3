@@ -1,2 +1,2 @@
-# AWS-S3
-All aws s3 practice
+# AWS
+All aws practice
