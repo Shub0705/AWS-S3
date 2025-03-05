@@ -1,0 +1,49 @@
+1:
+create Instance
+2:
+Apply role on ec2 instance 
+policy :CloudWatchAgentServerPolicy
+3:Install Cloud Agent
+sudo yum install -y amazon-cloudwatch-agent
+4.Configure and add JSON file of cloud agent
+sudo vim /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+{
+  "metrics": {
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}"
+    },
+    "metrics_collected": {
+      "mem": {
+        "measurement": [
+          "mem_used_percent"
+        ],
+        "metrics_collection_interval": 60
+      }
+    }
+  }
+}
+5.Start cloudagent 
+sudo amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json -s
+6.Go to AWS CloudWatch → Metrics → CWAgent.
+Look for mem_used_percent.
+7.Create Autoscaling Group with or without load balancer
+
+8.Create cloudwatch alarm  with cloudwatch matrics which we created 
+
+9.attach scaling polices to auto scaling group
+
+10 Test autoscaling 
+stress --vm 2 --vm-bytes 512M --timeout 120s
+
+
+_________________________________________________________________________________________________________________________________________________________
+
+History:
+ sudo yum install -y amazon-cloudwatch-agent
+    2  sudo vim  /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    3  sudo amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json -s
+    4  sudo systemctl status amazon-cloudwatch-agent
+    5  sudo systemctl start amazon-cloudwatch-agent
+    7  ls /opt/aws/amazon-cloudwatch-agent/etc/
+    12  free -m
+    13  stress --vm 2 --vm-bytes 200M --timeout 120s
